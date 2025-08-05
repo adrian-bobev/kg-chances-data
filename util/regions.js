@@ -48,13 +48,16 @@ async function getRegionsDataByDraft(draft) {
 async function getAllRegions() {
     console.log(`Fetching - all regions...`);
     const result = await fetch(`https://kg.sofia.bg/api/public/regions/all`).then(res => {
+        console.error(res);
         console.log(`Data recieved = all regions`);
         return res.json();
     }).catch(err => {
         console.error(`Failed to fetch - all regions`);
-        console.error(err);
-        
-    });;
+        throw new Error(
+            `Failed to fetch - all regions
+            ---------------------------------
+        ${err}`);
+    });
 
     await fs.writeFile(path.join(dir, `/regions.json`), JSON.stringify(result), 'utf8');
 }
