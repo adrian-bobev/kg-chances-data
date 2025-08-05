@@ -53,10 +53,7 @@ async function getAllRegions() {
     }).catch(err => {
         console.error(`Failed to fetch - all regions`);
         console.error(err);
-        throw new Error(
-            `Failed to fetch - all regions
-            ---------------------------------
-        ${err}`);
+        
     });;
 
     await fs.writeFile(path.join(dir, `/regions.json`), JSON.stringify(result), 'utf8');
